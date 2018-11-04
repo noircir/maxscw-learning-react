@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './Person/Person.css';
 import Person from './Person/Person'
 
 class App extends Component {
@@ -21,7 +22,7 @@ class App extends Component {
     })
   }
 
-  nameChangedHanler = (event) => {
+  nameChangedHandler = (event) => {
     this.setState({
       persons: [
         { name: 'Bruce	Thompson', age: 46 },
@@ -33,12 +34,24 @@ class App extends Component {
 
 
   render() {
+    const style = {
+      backgroundColor: 'rgba(173, 230, 147, 0.788)',
+      font: 'inherit',
+      border: '1px solid gray',
+      padding: '8px',
+      cursor: 'pointer'
+    }
+
     return (
       <div className="App">
         <h1>Create-React-App is running</h1>
         <h3>Building a React app from a boilerplate created by Facebook</h3>
 
-        <button onClick={() => this.switchNameHandler('Tom Hanks')}>Switch Name</button>
+        <button 
+          style={style}
+          onClick={this.switchNameHandler.bind(this, 'Tom Hanks')}>
+          Switch Name
+        </button>
 
         <Person 
           name={this.state.persons[0].name} 
@@ -47,7 +60,7 @@ class App extends Component {
           name={this.state.persons[1].name} 
           age={this.state.persons[1].age} 
           click={this.switchNameHandler.bind(this, 'Angela Merkel')}
-          changed={this.nameChangedHanler}>My hobbies: Racing</Person>
+          changed={this.nameChangedHandler}>My hobbies: Programming</Person>
         <Person 
           name={this.state.persons[2].name} 
           age={this.state.persons[2].age}/>
