@@ -5,6 +5,14 @@ import styles from './Person.css';
 // what these props are and what they represent.
 
 const person = ( props ) => {
+    // Testing Error Boundary.
+
+    // const rnd = Math.random();
+
+    // if (rnd > 0.7 ) {
+    //     throw new Error ('somehting went wrong: random number > 0.7');
+    // }
+
     return (
         <div className={styles.Person}>
             <p onClick={props.onDeletePerson}>
