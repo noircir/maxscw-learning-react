@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Radium, { StyleRoot } from 'radium';
 import './App.css';
 import './Person/Person.css';
 import Person from './Person/Person';
@@ -83,11 +82,7 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid gray',
       padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'forestgreen',
-        color: 'black'
-      }
+      cursor: 'pointer'
     }
 
     let persons = null;
@@ -113,10 +108,7 @@ class App extends Component {
 
       // Change button color to red only if the list of people is displayed
       style.backgroundColor ='red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+      
     }
 
     if (this.state.keyStrokeArr !== []) {
@@ -143,38 +135,36 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>Create-React-App is running</h1>
+      <div className="App">
+        <h1>Create-React-App is running</h1>
 
-          {/* ==================
-              SHOW INPUT LENGTH
-              ==================   */}
-          <span>
-            <input type="text" onChange={event => this.inputLengthHandler(event)} />
-            <p>The length of the input above is:  {this.state.inputLength}</p>
-            <ValidationComponent length={this.state.inputLength} />
-            {charBoxes}
-          </span>
-          
-          {/* Dynamically assign styles to the paragraph */}
-          <p className={classes.join(' ')}>Please notice the length of the list of people</p>
+        {/* ==================
+            SHOW INPUT LENGTH
+            ==================   */}
+        <span>
+          <input type="text" onChange={event => this.inputLengthHandler(event)} />
+          <p>The length of the input above is:  {this.state.inputLength}</p>
+          <ValidationComponent length={this.state.inputLength} />
+          {charBoxes}
+        </span>
+        
+        {/* Dynamically assign styles to the paragraph */}
+        <p className={classes.join(' ')}>Please notice the length of the list of people</p>
 
-          <button 
-            style={style}
-            onClick={this.togglePersonsHandler}>
-            Toggle People
-          </button>
+        <button 
+          style={style}
+          onClick={this.togglePersonsHandler}>
+          Toggle People
+        </button>
 
-          {/* ============
-              TOGGLE
-              ============ */}
-          { persons }
-        </div>
-      </StyleRoot>
+        {/* ============
+            TOGGLE
+            ============ */}
+        { persons }
+      </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a react app!!'));
   }
 }
 
-export default Radium(App);
+export default App;

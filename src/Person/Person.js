@@ -1,18 +1,11 @@
 import React from 'react';
-import Radium from 'radium';
 
 // The App passed down props as state, but this "dumb" component doesn't care 
 // what these props are and what they represent.
 
 const person = ( props ) => {
-    const style = {
-        '@media (min-width: 500px)': {
-            width: '450px'
-        }
-    };
-
     return (
-        <div className="Person" style={style}>
+        <div className="Person">
             <p onClick={props.onDeletePerson}>
                 I'm {props.name} and I'm {props.age} years old.
             </p>
@@ -27,4 +20,4 @@ const person = ( props ) => {
     )
 };
 
-export default Radium(person);
+export default person;
