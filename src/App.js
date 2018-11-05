@@ -14,7 +14,7 @@ class App extends Component {
     ], 
     showPersons: false,
     inputLength: 0,
-    keyStrokeArr: null
+    keyStrokeArr: []
   }
 
   // ====================
@@ -76,25 +76,25 @@ class App extends Component {
   render() {
     // inline style rendering for the button
     const style = {
-      // backgroundColor: 'rgba(173, 230, 147, 0.788)',
-      // font: 'inherit',
-      // border: '1px solid gray',
-      // padding: '8px',
-      // cursor: 'pointer'
-
-      outline: 'none',
-      border: 'none',
-      cursor: 'pointer',
-      position: 'relative',
-      background: 'rgba(173, 230, 147, 0.788)',
+      backgroundColor: 'rgba(173, 230, 147, 0.788)',
       font: 'inherit',
-      fontWeight: '300',
-      textTransform: 'uppercase',
-      letterSpacing: '2px',
-      padding: '25px 80px',
-      margin: '0 aut',
-      boxShadow: '0 6px rgba(173, 200, 147, 0.788)',
-      borderRadius: '20px',
+      border: '1px solid gray',
+      padding: '8px',
+      cursor: 'pointer'
+
+      // outline: 'none',
+      // border: 'none',
+      // cursor: 'pointer',
+      // position: 'relative',
+      // background: 'rgba(173, 230, 147, 0.788)',
+      // font: 'inherit',
+      // fontWeight: '300',
+      // textTransform: 'uppercase',
+      // letterSpacing: '2px',
+      // padding: '25px 80px',
+      // margin: '0 aut',
+      // boxShadow: '0 6px rgba(173, 200, 147, 0.788)',
+      // borderRadius: '20px',
     }
 
     let persons = null;
@@ -117,9 +117,12 @@ class App extends Component {
           }
         </div> 
       )
+      // Dynamic styling
+      style.backgroundColor ='red';
     }
 
-    if ( this.state.keyStrokeArr !== null ) {
+    if ( this.state.keyStrokeArr !== [] ) {
+      console.log(this.state.keyStrokeArr)
       charBoxes = (
         <div>
           {
@@ -131,6 +134,15 @@ class App extends Component {
       )
     }
     
+    // let classes = ['red', 'bold'].join(' ');  // red bold
+    let classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red'); // classes = ['red']
+    }
+
+    if (this.state.persons.length <= 1) {
+      classes.push('bold'); // classes = ['red', 'bold']
+    }
 
     return (
       <div className="App">
@@ -140,13 +152,14 @@ class App extends Component {
             SHOW INPUT LENGTH
             ==================   */}
         <span>
-          <input type="text" onChange={event => this.inputLengthHandler(event) }/>
+          <input type="text" onChange={event => this.inputLengthHandler(event)} />
           <p>The length of the input above is:  {this.state.inputLength}</p>
           <ValidationComponent length={this.state.inputLength} />
+          {charBoxes}
         </span>
-        {charBoxes}
+        
 
-        <h3>Building a React app from a boilerplate created by Facebook</h3>
+        <p className={classes.join(' ')}>Building a React app from a boilerplate created by Facebook</p>
 
         <button 
           style={style}
