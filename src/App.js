@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium, { StyleRoot } from 'radium';
 import './App.css';
 import './Person/Person.css';
 import Person from './Person/Person';
@@ -69,9 +70,11 @@ class App extends Component {
     this.setState({ inputLength: event.target.value.length });
   }
 
-  // ============
-  // RENDER     
-  // ============
+  // =============================================
+  // =============================================
+  //                   RENDER     
+  // =============================================
+  // =============================================
 
   render() {
     // inline style rendering for the button
@@ -80,21 +83,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid gray',
       padding: '8px',
-      cursor: 'pointer'
-
-      // outline: 'none',
-      // border: 'none',
-      // cursor: 'pointer',
-      // position: 'relative',
-      // background: 'rgba(173, 230, 147, 0.788)',
-      // font: 'inherit',
-      // fontWeight: '300',
-      // textTransform: 'uppercase',
-      // letterSpacing: '2px',
-      // padding: '25px 80px',
-      // margin: '0 aut',
-      // boxShadow: '0 6px rgba(173, 200, 147, 0.788)',
-      // borderRadius: '20px',
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'forestgreen',
+        color: 'black'
+      }
     }
 
     let persons = null;
@@ -117,12 +110,17 @@ class App extends Component {
           }
         </div> 
       )
-      // Dynamic styling
+
+      // Change button color to red only if the list of people is displayed
       style.backgroundColor ='red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
 
-    if ( this.state.keyStrokeArr !== [] ) {
-      console.log(this.state.keyStrokeArr)
+    if (this.state.keyStrokeArr !== []) {
+      // console.log(this.state.keyStrokeArr)
       charBoxes = (
         <div>
           {
@@ -145,36 +143,38 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <h1>Create-React-App is running</h1>
+      <StyleRoot>
+        <div className="App">
+          <h1>Create-React-App is running</h1>
 
-        {/* ==================
-            SHOW INPUT LENGTH
-            ==================   */}
-        <span>
-          <input type="text" onChange={event => this.inputLengthHandler(event)} />
-          <p>The length of the input above is:  {this.state.inputLength}</p>
-          <ValidationComponent length={this.state.inputLength} />
-          {charBoxes}
-        </span>
-        
+          {/* ==================
+              SHOW INPUT LENGTH
+              ==================   */}
+          <span>
+            <input type="text" onChange={event => this.inputLengthHandler(event)} />
+            <p>The length of the input above is:  {this.state.inputLength}</p>
+            <ValidationComponent length={this.state.inputLength} />
+            {charBoxes}
+          </span>
+          
+          {/* Dynamically assign styles to the paragraph */}
+          <p className={classes.join(' ')}>Please notice the length of the list of people</p>
 
-        <p className={classes.join(' ')}>Building a React app from a boilerplate created by Facebook</p>
+          <button 
+            style={style}
+            onClick={this.togglePersonsHandler}>
+            Toggle People
+          </button>
 
-        <button 
-          style={style}
-          onClick={this.togglePersonsHandler}>
-          Toggle People
-        </button>
-
-        {/* ============
-            TOGGLE
-            ============ */}
-        { persons }
-      </div>
+          {/* ============
+              TOGGLE
+              ============ */}
+          { persons }
+        </div>
+      </StyleRoot>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a react app!!'));
   }
 }
 
-export default App;
+export default Radium(App);
