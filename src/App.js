@@ -6,32 +6,45 @@ import Person from './Person/Person'
 class App extends Component {
   state = {
     persons: [
-      { name: 'Bob', age: 46 },
-      { name: 'Dmitri', age: 15 },
-      { name: 'Connor', age: 32 }
-    ]
+      { id: 'fsfs', name: 'Bob', age: 46 },
+      { id: 'esygsherg', name: 'Dmitri', age: 15 },
+      { id: 'dfgdfgsw', name: 'Connor', age: 32 }
+    ], 
+    showPersons: false
   }
 
-  switchNameHandler = (newName) => {
-    this.setState({ 
-      persons: [
-        { name: newName, age: 46 },
-        { name: 'Guillermo	Lambert', age: 15 },
-        { name: 'Delia	Harris', age: 32 }
-      ]
-    })
+  nameChangedHandler = (event, id) => {
+    // find array index of a person with this id:
+    const personIndex = this.state.persons.findIndex(p => p.id === id);
+    // create a copy of the found person object:
+    const person = {
+      ...this.state.persons[personIndex]
+    }
+    // Or:
+    // const person = Object.assign({}, this.state.persons[personIndex]);
+
+    // assign a new name to that copy person:
+    person.name = event.target.value;
+    // create a copy of the state array of persons:
+    const persons = [...this.state.persons];
+    // replace the old person with a new submitted one in that copy array:
+    persons[personIndex]= person;
+    // update state:
+    this.setState({ persons })
   }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        { name: 'Bruce	Thompson', age: 46 },
-        { name: event.target.value, age: 15 },
-        { name: 'Delia	Harris', age: 32 }
-      ]
-    })
+  deletePersonHandler = (personIndex) => {
+    // If we splice the original state's array, we are mutating the state, 
+    // which is a bad idea. Change state only with 'setState'.
+    
+    const persons = [...this.state.persons]  // spread operator creates a copy of the original array
+    persons.splice(personIndex, 1);
+    this.setState({ persons })
   }
 
+  togglePersonsHandler = () => {
+    this.setState({ showPersons: !this.state.showPersons});
+  }
 
   render() {
     const style = {
@@ -42,6 +55,24 @@ class App extends Component {
       cursor: 'pointer'
     }
 
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div >
+          {this.state.persons.map((person, i) => {
+            return <Person
+              key={person.id}
+              click={this.deletePersonHandler.bind(person, i)}
+              name={person.name}
+              age={person.age}
+              changed={(event) => this.nameChangedHandler(event, person.id)} />
+            })
+          }
+        </div> 
+      )
+    }
+
     return (
       <div className="App">
         <h1>Create-React-App is running</h1>
@@ -49,21 +80,12 @@ class App extends Component {
 
         <button 
           style={style}
-          onClick={this.switchNameHandler.bind(this, 'Tom Hanks')}>
-          Switch Name
+          onClick={this.togglePersonsHandler}>
+          Toggle People
         </button>
 
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age} />
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age} 
-          click={this.switchNameHandler.bind(this, 'Angela Merkel')}
-          changed={this.nameChangedHandler}>My hobbies: Programming</Person>
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age}/>
+        {/* What if we wanted to hide these rows of people when pressing the button above? */}
+        { persons }
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a react app!!'));
