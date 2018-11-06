@@ -1,6 +1,4 @@
-.App {
-  text-align: center;
-}
+
 
 .red {
   color: red;
@@ -10,7 +8,7 @@
   font-weight: bold;
 }
 
-.App button {
+.Dashboard button {
   outline: none;
   border: 1p solid blue;
   padding: 16px;
@@ -19,17 +17,17 @@
   color: white;
 }
 
-.App button:hover {
+.Dashboard button:hover {
   background-color: rgb(187, 233, 187);
   color: black;
   cursor: pointer;
 }
 
-.App button.Red {
+.Dashboard button.Red {
   background-color: rgb(226, 69, 69);
 }
 
-.App button.Red:hover {
+.Dashboard button.Red:hover {
   background-color: rgb(245, 160, 150);
   color: black;
 }
