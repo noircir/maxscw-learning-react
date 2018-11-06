@@ -1,29 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styles from './Person.css';
 
-const person = ( props ) => {
-    // Testing Error Boundary.
 
-    // const rnd = Math.random();
+class Person extends Component {
+    constructor(props) {
+        super(props);
+        console.log('[Person.js] Inside Constructor', props)
 
-    // if (rnd > 0.7 ) {
-    //     throw new Error ('somehting went wrong: random number > 0.7');
-    // }
+    }
 
-    return (
-        <div className={styles.Person}>
-            <p onClick={props.click}>
-                I'm {props.name} and I'm {props.age} years old.
+    componentWillMount() {
+        console.log('[Person.js] Inside componentWillMount()');
+    }
+
+    componentDidMount() {
+        console.log('[Person.js] Inside componentDidMount()');
+    }
+    componentWillUnmount() {
+        console.log('[Person.js] Inside componentWillUnmount()');
+    }
+
+    render() {
+        console.log('[Person.js] inside render()')
+        return (
+            <div className={styles.Person}>
+                <p onClick={this.props.click}>
+                    I'm {this.props.name} and I'm {this.props.age} years old.
             </p>
 
-            {/* Nice!  A way to pass any inner HTML */}
-            <p>{props.children}</p>
+                {/* Nice!  A way to pass any inner HTML */}
+                <p>{this.props.children}</p>
 
-            {/* Two-way binding: 'onChange' sends updated info to the root; 
+                {/* Two-way binding: 'onChange' sends updated info to the root; 
             the root sends back the updated state and sets it as 'value') */}
-            <input type="text" onChange={props.changed} value={props.name} />
-        </div>
-    )
-};
+                <input type="text" onChange={this.props.changed} value={this.props.name} />
+            </div>
+        )
+    }
+}
 
-export default person;
+export default Person;

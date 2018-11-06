@@ -4,40 +4,16 @@ import Persons from '../components/Persons/Persons';
 import Dashboard from '../components/Dashboard/Dashboard';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    console.log('[App.js] Inside Constructor', props)
-    // Can have state inside the constructor, though it's an older way
-    this.state = {
-      persons: [
-        { id: 'fsfs', name: 'Bob', age: 46 },
-        { id: 'esygsherg', name: 'Dmitri', age: 15 },
-        { id: 'dfgdfgsw', name: 'Connor', age: 32 }
-      ],
-      showPersons: false,
-      inputLength: 0,
-      keyStrokeArr: []
-    }
+  state = {
+    persons: [
+      { id: 'fsfs', name: 'Bob', age: 46 },
+      { id: 'esygsherg', name: 'Dmitri', age: 15 },
+      { id: 'dfgdfgsw', name: 'Connor', age: 32 }
+    ], 
+    showPersons: false,
+    inputLength: 0,
+    keyStrokeArr: []
   }
-
-  componentWillMount() {
-    console.log('[App.js] Inside componentWillMount()');
-  }
-
-  componentDidMount() {
-    console.log('[App.js] Inside componentDidMount()');
-  }
-  
-  // state = {
-  //   persons: [
-  //     { id: 'fsfs', name: 'Bob', age: 46 },
-  //     { id: 'esygsherg', name: 'Dmitri', age: 15 },
-  //     { id: 'dfgdfgsw', name: 'Connor', age: 32 }
-  //   ], 
-  //   showPersons: false,
-  //   inputLength: 0,
-  //   keyStrokeArr: []
-  // }
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => p.id === id);
@@ -72,7 +48,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('[App.js] inside render()')
     let persons = null;
 
     if (this.state.showPersons) {
