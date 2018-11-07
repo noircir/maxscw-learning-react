@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styles from './App.css';
 import Persons from '../components/Persons/Persons';
 import Dashboard from '../components/Dashboard/Dashboard';
 
-class App extends Component {
+class App extends PureComponent {
   constructor(props) {
     super(props);
     console.log('[App.js] Inside Constructor', props)
@@ -27,7 +27,24 @@ class App extends Component {
   componentDidMount() {
     console.log('[App.js] Inside componentDidMount()');
   }
-  
+
+  // This is how to stop unnecessary lifecycle execution.
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('[UPDATE App.js Inside shouldComponentUpdate', nextProps, nextState)
+  //   return nextState.persons !== this.state.persons ||
+  //     nextState.showPersons !== this.state.showPersons ||
+  //     nextState.keyStrokeArr !== this.state.keyStrokeArr ||
+  //     nextState.inputLength !== this.state.inputLength;
+  // }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js Inside componentWillUpdate', nextProps, nextState)
+  }
+
+  componentDidUpdate() {
+    console.log('[UPDATE App.js Inside componentDidUpdate')
+  }
+
   // state = {
   //   persons: [
   //     { id: 'fsfs', name: 'Bob', age: 46 },
@@ -84,6 +101,10 @@ class App extends Component {
 
     return (
       <div className={styles.App}>
+        <button 
+          onClick={() => {this.setState({showPersons: true})}}>
+          Show Persons
+        </button>
         <Dashboard 
           appTitle={this.props.title}
           showPersons={this.state.showPersons}

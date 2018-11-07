@@ -3,7 +3,6 @@ import CharComponent from '../CharComponent/CharComponent';
 
 const validationComponent = (props) => {
     let charBoxes = null;
-
     if (props.keyStrokeArr !== []) {
         charBoxes = props.keyStrokeArr.map((char, i) => <CharComponent key={i} char={char} />)
     }
