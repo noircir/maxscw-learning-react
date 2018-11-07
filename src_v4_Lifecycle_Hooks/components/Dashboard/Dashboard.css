@@ -8,7 +8,7 @@
   font-weight: bold;
 }
 
-.Button {
+.Dashboard button {
   outline: none;
   border: 1p solid blue;
   padding: 16px;
@@ -17,17 +17,17 @@
   color: white;
 }
 
-.Button:hover {
+.Dashboard button:hover {
   background-color: rgb(187, 233, 187);
   color: black;
   cursor: pointer;
 }
 
-.Button.Red {
+.Dashboard button.Red {
   background-color: rgb(226, 69, 69);
 }
 
-.Button.Red:hover {
+.Dashboard button.Red:hover {
   background-color: rgb(245, 160, 150);
   color: black;
 }

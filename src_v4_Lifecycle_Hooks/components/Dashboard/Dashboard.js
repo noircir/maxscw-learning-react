@@ -1,13 +1,12 @@
 import React from 'react';
 import styles from './Dashboard.css';
 import ValidationComponent from '../ValidationComponent/ValidationComponent';
-import Aux from '../../hoc/Aux';
 
 const dashboard = (props) => {
     let classes = [];
-    let btnClass = styles.Button;
+    let btnClass = '';
     if (props.showPersons) {
-        btnClass = [styles.Button, styles.Red].join(' ');
+        btnClass = styles.Red;
     }
     
     if (props.persons.length <= 2) {
@@ -19,7 +18,7 @@ const dashboard = (props) => {
     }
 
     return (
-        <Aux>
+        <div className={styles.Dashboard}>
             <h1>{ props.appTitle }</h1>
             {/* The first component receiving the result of 'onChange' event, sends the event up the chain. */}
             <ValidationComponent
@@ -34,7 +33,7 @@ const dashboard = (props) => {
                 onClick={props.clicked}>
                 Toggle People
             </button>
-        </Aux>
+        </div>
     );
 }
 

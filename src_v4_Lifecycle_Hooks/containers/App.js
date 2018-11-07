@@ -2,10 +2,6 @@ import React, { PureComponent } from 'react';
 import styles from './App.css';
 import Persons from '../components/Persons/Persons';
 import Dashboard from '../components/Dashboard/Dashboard';
-import withClass from '../hoc/withClass'
-import Aux from '../hoc/Aux'
-
-//console.log(React.version)  //16.6.0
 
 class App extends PureComponent {
   constructor(props) {
@@ -104,7 +100,7 @@ class App extends PureComponent {
     }
 
     return (
-      <Aux>
+      <div className={styles.App}>
         <button 
           onClick={() => {this.setState({showPersons: true})}}>
           Show Persons
@@ -118,9 +114,9 @@ class App extends PureComponent {
           inputLength={this.state.inputLength}
           keyStrokeArr={this.state.keyStrokeArr} />
         { persons }
-      </Aux>
+      </div>
     );
   }
 }
 
-export default withClass(App, styles.App);
+export default App;
